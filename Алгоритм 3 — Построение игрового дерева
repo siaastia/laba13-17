@@ -1,0 +1,30 @@
+class Node:
+    def __init__(self, value):
+        self.value = value      # состояние игры в узле
+        self.children = []      # возможные последующие состояния
+
+
+def print_tree(root):
+    # Вывод дерева в ширину для наглядности структуры
+    queue = [(root, 0)]
+    while queue:
+        node, level = queue.pop(0)
+        print("  " * level + "- " + node.value)
+        for child in node.children:
+            queue.append((child, level + 1))
+
+
+# ТЕСТИРОВАНИЕ ПОСТРОЕНИЯ ДЕРЕВА
+root = Node("S0")  # начальное состояние
+a = Node("S1")
+b = Node("S2")
+
+root.children.append(a)
+root.children.append(b)
+
+a.children.append(Node("S1.1"))
+a.children.append(Node("S1.2"))
+b.children.append(Node("S2.1"))
+
+print("Игровое дерево состояний:")
+print_tree(root)
