@@ -1,0 +1,30 @@
+def minimax_tree(node, is_max):
+    # node — текущее состояние игрового дерева (лист или поддерево)
+    # is_max — True, если ход игрока MAX, False — игрока MIN
+
+    if isinstance(node, int):
+        return node  # лист дерева: возвращаем оценку позиции
+
+    if is_max:
+        best = -10**9  # начальное значение для поиска максимума
+        for child in node:  # перебор возможных ходов
+            best = max(best, minimax_tree(child, False))  # рекурсивный вызов для MIN
+        return best
+    else:
+        best = 10**9  # начальное значение для поиска минимума
+        for child in node:  # перебор возможных ходов
+            best = min(best, minimax_tree(child, True))  # рекурсивный вызов для MAX
+        return best
+
+
+# ТЕСТИРОВАНИЕ АЛГОРИТМА
+tree = [
+    [3, 5, 2],
+    [9, 1, 7],
+    [4, 6, 8]
+]
+
+result = minimax_tree(tree, True)  # стартует игрок MAX
+
+print("Игровое дерево:", tree)
+print("Результат Minimax:", result)
