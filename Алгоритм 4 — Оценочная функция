@@ -1,0 +1,15 @@
+def evaluate(state):
+    # state — текущее состояние игры
+
+    if state == "win":
+        return 10   # выигрышная позиция
+    if state == "lose":
+        return -10  # проигрышная позиция
+    return 0        # нейтральное состояние
+
+
+# ТЕСТИРОВАНИЕ ОЦЕНОЧНОЙ ФУНКЦИИ
+states = ["win", "lose", "draw"]
+
+for s in states:
+    print(f"Состояние: {s}, оценка:", evaluate(s))
