@@ -16,7 +16,6 @@ def minimax_tree(node, is_max):
             best = min(best, minimax_tree(child, True))  # рекурсивный вызов для MAX
         return best
 
-
 # ТЕСТИРОВАНИЕ АЛГОРИТМА
 tree = [
     [3, 5, 2],
