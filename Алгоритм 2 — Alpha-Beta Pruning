@@ -1,0 +1,38 @@
+def alphabeta_tree(node, alpha, beta, is_max):
+    # node — текущее состояние игрового дерева
+    # alpha — лучшая оценка для MAX
+    # beta — лучшая оценка для MIN
+    # is_max — текущий игрок
+
+    if isinstance(node, int):
+        return node  # лист дерева: возвращаем оценку
+
+    if is_max:
+        value = -10**9
+        for child in node:  # перебор возможных ходов
+            value = max(value, alphabeta_tree(child, alpha, beta, False))
+            alpha = max(alpha, value)  # обновление границы alpha
+            if alpha >= beta:
+                break  # отсечение невыгодной ветви
+        return value
+    else:
+        value = 10**9
+        for child in node:  # перебор возможных ходов
+            value = min(value, alphabeta_tree(child, alpha, beta, True))
+            beta = min(beta, value)  # обновление границы beta
+            if beta <= alpha:
+                break  # отсечение ветви
+        return value
+
+
+# ТЕСТИРОВАНИЕ АЛГОРИТМА
+tree = [
+    [3, 5, 2],
+    [9, 1, 7],
+    [4, 6, 8]
+]
+
+result = alphabeta_tree(tree, -10**9, 10**9, True)
+
+print("Игровое дерево:", tree)
+print("Результат Alpha-Beta:", result)
